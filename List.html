@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <script src="js/jquery-3.2.1.min.js"></script>
+<title>친구 추가</title>
+</head>
+<style>
+        .container{
+            width: 350px;
+            height: auto;
+            border: 2px solid black;
+        }
+        .friendcon{
+            width: 330px;
+            margin-left: 8px;
+            margin-top: 40px;
+            height: 80px;
+            border: 2px solid black;
+            display: inline-block;
+        }
+        
+        .friendimg{
+/*            border: 1px solid red;*/
+            width: 80px;
+            height: 80px;
+            display: inline-block;
+        }
+        .infocon{
+/*            border: 1px solid orange;*/
+            width: 230px;
+            height: auto;
+            display: inline-block;
+            float: right;
+        }
+        
+        .userinfo{
+            width: 240px;
+            height: auto;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        #fImg{
+            width: 70px;
+            height: 70px;
+            border-radius: 70px;
+            padding: 3px;
+            display: inline-block;   
+            cursor: pointer;
+        }
+        #username{
+            display: block;
+            margin-top: 15px;
+/*            border: 1px solid yellow;*/
+            width: 180px;
+        }
+        #userBirth{
+            display: inline-block;
+/*            border: 1px solid blue;*/
+        }
+        #userPhone{
+            display: inline-block;
+/*            border: 1px solid red;*/
+            margin-left: 20px;
+            
+        }
+        #moreimg{
+/*            border: 1px solid black;*/
+            width: 50px;
+            height: 50px;
+        }
+        .plusimg{
+            margin-left: 140px;
+           
+        }
+        .more{
+            width: 330px;
+            margin-left: 8px;
+            margin-top: 20px;
+            height: 80px;
+/*            border: 2px solid black;*/
+            display: inline-block;
+        }
+    </style>
+    
+    <script>
+          function chk() {
+          $.ajax({
+            type: "post",
+            url: "groupList.do",
+            dataType: "json",
+            success: function(data) {
+                var out = "";
+               console.log(data);
+               if(data[0].jsonList != null){
+                    out += '<div class="container">';
+                    out += '<div class="friendcon">';
+                    out += '<div class="friendimg">';
+                    out += '<img src="'+ data[0].MEMBER_IMG +'" id="fImg">';
+                    out += '</div>';
+                    out += '<div class="infocon">';
+                    out += '<div id="username">' + data[0].MEMBER_NAME +  '';
+                    out += '</div>';
+                    out += '<div class="userinfo">';
+                    out += '<div id="userBirth">' + data[0].MEMBER_BIRTH + '';
+                    out += '<div>';
+                    out += '<div id="userPhone">' + data[0].MEMBER_PHONE + '';
+                    out += '</div></div></div>';
+                    out += '<div class="more">';
+                    out += '<div class="plusimg">';
+                    out += '<form action="friend.do" name="fAdd" id="addFriend" onclick="chk();">';
+                    out += '</form></div></div>';
+                    
+               }else{
+                  out += '<div class="more"';
+                      out += '<div class="plusimg">';
+                      out += '<form action="friend.do" name="fAdd" id="addFriend" onclick="chk();">';
+                      out += '<img type="img" src="D:\jsp\Tomorrowhat\img\plus.png" id="fImg">';
+                      out += '</form></div></div>';
+               
+               }
+            }
+          });
+      
+    }
+    </script>
+<body>
+    
+    
+ <form class="cont" action="groupList.do">
+     <div id="list_Cover">
+    
+    </div>
+
+<!--
+	<div class="container">
+        <div class="friendcon">
+            <div class="friendimg">
+                <img src="D:\javascript\img\Desert.jpg" id="fImg">
+            </div>
+            <div class="infocon">
+                <div id="username"> 정현우 </div>
+                <div class="userinfo">
+                    <div id="userBirth"> 6월 13일 </div>
+                    <div id="userPhone"> 010-6304-6041 </div>
+                </div>
+            </div>
+        </div>
+-->
+
+</form>   
+
+<!--
+         <div class="more">
+            <div class="plusimg">
+            	<form action="friend.do" name="fAdd" id="addFriend" onclick="chk();"> 
+                	<img type="img" src="D:\jsp\Tomorrowhat\img\plus.png" id="fImg" >
+                	
+				</form>            	
+				
+        	</div>
+    	</div> 
+-->
+
+
+</body>
+</html>
